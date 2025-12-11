@@ -1,169 +1,348 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Studifly - Le compagnon d’études intelligent pour organiser vos cours et améliorer votre productivité.">
-    <title>Studifly - Compagnon d'études intelligent</title>
-    <style>
-        /* Reset basique */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Studifly est votre compagnon d’études intelligent : organisez vos cours, gérez vos tâches, collaborez avec d’autres étudiants et améliorez votre productivité.">
+<title>Studifly - Compagnon d'études intelligent</title>
+<style>
+/* ===== Reset et styles de base ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
 
-        header {
-            background-color: #4b6cb7;
-            background-image: linear-gradient(315deg, #4b6cb7 0%, #182848 74%);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-        }
+/* ===== Header ===== */
+header {
+    background: linear-gradient(315deg, #4b6cb7 0%, #182848 74%);
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+}
 
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
 
-        header p {
-            font-size: 1.2rem;
-        }
+header p {
+    font-size: 1.2rem;
+}
 
-        section {
-            padding: 50px 20px;
-            max-width: 1200px;
-            margin: auto;
-        }
+/* ===== Sections ===== */
+section {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: auto;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
 
-        h2 {
-            color: #4b6cb7;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
+h2 {
+    color: #4b6cb7;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-        .feature {
-            background-color: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
+h3 {
+    color: #182848;
+    margin-bottom: 10px;
+}
 
-        .feature:hover {
-            transform: translateY(-5px);
-        }
+.description, .faq p {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
 
-        .feature h3 {
-            margin-bottom: 10px;
-            color: #182848;
-        }
+/* ===== Features, Advantages, FAQ ===== */
+.features, .advantages, .faq-section {
+    display: grid;
+    gap: 20px;
+    margin-top: 30px;
+}
 
-        .feature p {
-            font-size: 0.95rem;
-        }
+.features {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
 
-        .stack {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
+.feature, .advantage, .faq-item {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
 
-        .stack-item {
-            background-color: #4b6cb7;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
+.feature:hover, .advantage:hover, .faq-item:hover {
+    transform: translateY(-5px);
+}
 
-        footer {
-            background-color: #182848;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
-        }
+/* ===== FAQ toggle ===== */
+.faq-item p {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
 
-        footer a {
-            color: #f5f7fa;
-            text-decoration: underline;
-        }
+/* ===== Stack ===== */
+.stack {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
 
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+.stack-item {
+    background: #4b6cb7;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* ===== Screenshots ===== */
+.screenshots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.screenshots img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    object-fit: cover;
+}
+
+/* ===== Footer ===== */
+footer {
+    background: #182848;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+}
+
+footer a {
+    color: #f5f7fa;
+    text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>Studifly</h1>
-        <p>Le compagnon d’études intelligent pour organiser vos cours et améliorer votre productivité</p>
-    </header>
+<header>
+    <h1>Studifly</h1>
+    <p>Le compagnon d’études intelligent pour organiser vos cours et améliorer votre productivité</p>
+</header>
 
-    <section>
-        <h2>Fonctionnalités principales</h2>
-        <div class="features">
-            <div class="feature">
-                <h3>Organisation intelligente</h3>
-                <p>Planification des cours, examens et tâches avec un agenda interactif pour ne rien oublier.</p>
-            </div>
-            <div class="feature">
-                <h3>Partage de ressources</h3>
-                <p>Accédez et partagez vos cours, notes et fiches de révision avec simplicité.</p>
-            </div>
-            <div class="feature">
-                <h3>Notifications & rappels</h3>
-                <p>Recevez des alertes pour les devoirs et événements importants afin de rester à jour.</p>
-            </div>
-            <div class="feature">
-                <h3>Mode focus & productivité</h3>
-                <p>Outils pour vous aider à vous concentrer sur vos priorités et maximiser votre apprentissage.</p>
-            </div>
+<section>
+    <h2>Description</h2>
+    <p class="description">
+        Studifly est votre compagnon d’études intelligent, conçu pour aider les étudiants à organiser leurs cours, gérer leurs tâches, collaborer efficacement avec d’autres étudiants et améliorer leur productivité. 
+        Grâce à une interface intuitive et moderne, Studifly regroupe tous les outils essentiels pour réussir vos études : agenda interactif, notifications, partage de ressources pédagogiques et mode focus. 
+        Construit avec React Native, TypeScript et Supabase, Studifly offre une expérience fluide et performante sur mobile.
+    </p>
+</section>
+
+<section>
+    <h2>Fonctionnalités principales</h2>
+    <div class="features">
+        <div class="feature">
+            <h3>Organisation intelligente</h3>
+            <p>Planification des cours, examens et tâches avec un agenda interactif pour ne rien oublier.</p>
         </div>
-    </section>
-
-    <section>
-        <h2>Technologies utilisées</h2>
-        <div class="stack">
-            <div class="stack-item">React Native</div>
-            <div class="stack-item">TypeScript</div>
-            <div class="stack-item">Supabase</div>
-            <div class="stack-item">Tailwind CSS</div>
-            <div class="stack-item">Styled Components</div>
-            <div class="stack-item">Node.js</div>
+        <div class="feature">
+            <h3>Partage de ressources</h3>
+            <p>Accédez et partagez vos cours, notes et fiches de révision avec simplicité.</p>
         </div>
-    </section>
+        <div class="feature">
+            <h3>Notifications & rappels</h3>
+            <p>Recevez des alertes pour les devoirs et événements importants afin de rester à jour.</p>
+        </div>
+        <div class="feature">
+            <h3>Mode focus & productivité</h3>
+            <p>Outils pour vous aider à vous concentrer sur vos priorités et maximiser votre apprentissage.</p>
+        </div>
+    </div>
+</section>
 
-    <section>
-        <h2>À propos</h2>
-        <p>Studifly est une application mobile destinée aux étudiants pour organiser leurs cours, gérer leurs tâches, collaborer avec d’autres étudiants et améliorer leur productivité. Elle est construite avec des technologies modernes pour offrir une expérience fluide et intuitive sur mobile.</p>
-    </section>
+<section>
+    <h2>Captures d’écran</h2>
+    <div class="screenshots">
+        <img src="devoirs.jpeg" alt="Devoirs Studifly">
+        <img src="groupe.jpeg" alt="Groupe d'études">
+        <img src="login.jpeg" alt="login connectez-vous">
+        <img src="matière.jpeg" alt="Matière Studifly">
+    </div>
+</section>
 
-    <footer>
-        <p>© 2025 Studifly. Tous droits réservés. | Contact : <a href="mailto:contact@studifly.com">contact@studifly.com</a></p>
-        <p><a href="https://github.com/ginfreecss46/Studifly" target="_blank">Voir le projet sur GitHub</a></p>
-    </footer>
+<section>
+    <h2>Avantages pour l’étudiant</h2>
+    <div class="advantages">
+        <div class="advantage">
+            <h3>Gain de temps</h3>
+            <p>Centralisation de toutes les informations essentielles pour vos cours et devoirs.</p>
+        </div>
+        <div class="advantage">
+            <h3>Collaboration facile</h3>
+            <p>Partage rapide des notes et documents avec vos camarades.</p>
+        </div>
+        <div class="advantage">
+            <h3>Ne rien oublier</h3>
+            <p>Notifications et rappels pour rester à jour avec vos tâches et examens.</p>
+        </div>
+        <div class="advantage">
+            <h3>Meilleure concentration</h3>
+            <p>Mode focus pour optimiser vos sessions d’étude et rester productif.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Comment ça fonctionne</h2>
+    <div class="description">
+        <p>1. Créez votre compte ou connectez-vous via Supabase.</p>
+        <p>2. Ajoutez vos cours, examens et tâches dans l’agenda.</p>
+        <p>3. Partagez vos notes et ressources avec vos camarades.</p>
+        <p>4. Recevez des notifications pour vos deadlines et utilisez le mode focus pour étudier efficacement.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Technologies utilisées</h2>
+    <div class="stack">
+        <div class="stack-item">React Native</div>
+        <div class="stack-item">TypeScript</div>
+        <div class="stack-item">Supabase</div>
+        <div class="stack-item">Tailwind CSS</div>
+        <div class="stack-item">Styled Components</div>
+        <div class="stack-item">Node.js</div>
+    </div>
+</section>
+
+<section>
+    <h2>FAQ</h2>
+    <div class="faq-section">
+        <div class="faq-item">
+            <h3>L’appli est-elle gratuite ?</h3>
+            <p>✅ Oui, Studifly est totalement gratuite pour tous les étudiants.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Peut-on partager ses notes ?</h3>
+            <p>✅ Oui, vous pouvez partager vos cours et documents avec vos camarades.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Faut-il créer un compte ?</h3>
+            <p>✅ Oui, un compte est nécessaire pour sauvegarder vos données et accéder aux fonctionnalités de l’application.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Sur quelles plateformes l’appli fonctionne-t-elle ?</h3>
+            <p>✅ Studifly est disponible sur  Android via le Playstore</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2>Téléchargement / GitHub</h2>
+    <p class="description">
+        L’application est open-source et disponible. Vous pouvez consulter le code, contribuer ou tester l’application contactez-moi par mail pour plus d'informations. si voyez des bugs ou des améliorations à proposer. n'hésitez pas à me contacter.
+    </p>
+<footer>
+    <p>© 2025 Studifly. Tous droits réservés. | Contact : <a href="batchiemmanuel123@gmail.com">contact@studifly.com</a></p>
+</footer>
+
+<script>
+// ====== FAQ Toggle ======
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('open');
+        const answer = item.querySelector('p');
+        if(item.classList.contains('open')) {
+            answer.style.maxHeight = answer.scrollHeight + "px";
+        } else {
+            answer.style.maxHeight = null;
+        }
+    });
+});
+
+// ====== Fade-in Sections on Scroll ======
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+sections.forEach(section => {
+    observer.observe(section);
+});
+
+// ====== Scroll to Top Button ======
+const scrollBtn = document.createElement('button');
+scrollBtn.textContent = "↑";
+scrollBtn.id = "scrollTopBtn";
+scrollBtn.style.position = "fixed";
+scrollBtn.style.bottom = "30px";
+scrollBtn.style.right = "30px";
+scrollBtn.style.padding = "10px 15px";
+scrollBtn.style.fontSize = "20px";
+scrollBtn.style.border = "none";
+scrollBtn.style.borderRadius = "50%";
+scrollBtn.style.background = "#4b6cb7";
+scrollBtn.style.color = "#fff";
+scrollBtn.style.cursor = "pointer";
+scrollBtn.style.display = "none";
+scrollBtn.style.zIndex = "1000";
+document.body.appendChild(scrollBtn);
+
+scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+window.addEventListener('scroll', () => {
+    if(window.scrollY > 300){
+        scrollBtn.style.display = "block";
+    } else {
+        scrollBtn.style.display = "none";
+    }
+});
+</script>
 
 </body>
 </html>
+
