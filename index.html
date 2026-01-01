@@ -6,7 +6,6 @@
 <meta name="description" content="Studifly est votre compagnon d’études intelligent : organisez vos cours, gérez vos tâches, collaborez avec d’autres étudiants et améliorez votre productivité.">
 <title>Studifly - Compagnon d'études intelligent</title>
 <style>
-/* ===== Reset et styles de base ===== */
 * {
     margin: 0;
     padding: 0;
@@ -21,26 +20,108 @@ body {
     scroll-behavior: smooth;
 }
 
-/* ===== Header ===== */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(75, 108, 183, 0.95);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+}
+
+.nav-logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: white;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+nav a:hover {
+    opacity: 0.8;
+}
+
+body {
+    padding-top: 60px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #4b6cb7;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.btn:hover {
+    background: #182848;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(75, 108, 183, 0.3);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4b6cb7, #182848);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 8px 20px rgba(75, 108, 183, 0.4);
+}
+
 header {
     background: linear-gradient(315deg, #4b6cb7 0%, #182848 74%);
     color: white;
-    padding: 50px 20px;
+    padding: 60px 20px 40px;
     text-align: center;
+    margin-top: 20px;
 }
 
 header h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
+    font-size: clamp(1.5rem, 8vw, 3.5rem);
+    margin-bottom: 15px;
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
 header p {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    font-weight: 300;
+    margin-bottom: 25px;
 }
 
-/* ===== Sections ===== */
+header .cta-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
 section {
-    padding: 50px 20px;
+    padding: clamp(30px, 8vw, 50px) clamp(12px, 5vw, 20px);
     max-width: 1200px;
     margin: auto;
     opacity: 0;
@@ -57,23 +138,24 @@ h2 {
     color: #4b6cb7;
     margin-bottom: 20px;
     text-align: center;
+    font-size: clamp(1.3rem, 5vw, 2rem);
 }
 
 h3 {
     color: #182848;
     margin-bottom: 10px;
+    font-size: clamp(1rem, 3vw, 1.3rem);
 }
 
 .description, .faq p {
     max-width: 900px;
     margin: auto;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
     line-height: 1.8;
     margin-bottom: 20px;
 }
 
-/* ===== Features, Advantages, FAQ ===== */
 .features, .advantages, .faq-section {
     display: grid;
     gap: 20px;
@@ -81,48 +163,85 @@ h3 {
 }
 
 .features {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.advantages {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.faq-section {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .feature, .advantage, .faq-item {
     background: white;
     border-radius: 15px;
-    padding: 20px;
+    padding: clamp(15px, 5vw, 20px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
+    border-left: 4px solid #4b6cb7;
 }
 
 .feature:hover, .advantage:hover, .faq-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    border-left-color: #182848;
 }
 
-/* ===== FAQ toggle ===== */
+.feature h3, .advantage h3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.feature h3::before, .advantage h3::before {
+    content: "✨";
+    font-size: 1.5em;
+}
+
 .faq-item p {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease;
+    color: #555;
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
-/* ===== Stack ===== */
+.faq-item.open p {
+    max-height: 500px;
+}
+
+.faq-item h3::after {
+    content: "▼";
+    margin-left: auto;
+    transition: transform 0.3s ease;
+    font-size: 0.8em;
+}
+
+.faq-item.open h3::after {
+    transform: rotate(180deg);
+}
+
 .stack {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: clamp(8px, 2vw, 15px);
     margin-top: 20px;
 }
 
 .stack-item {
     background: #4b6cb7;
     color: white;
-    padding: 10px 15px;
+    padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 15px);
     border-radius: 50px;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    white-space: nowrap;
 }
 
-/* ===== Screenshots ===== */
 .screenshots {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -133,18 +252,19 @@ h3 {
 .screenshots img {
     width: 100%;
     height: auto;
+    max-height: 500px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     object-fit: cover;
 }
 
-/* ===== Footer ===== */
 footer {
     background: #182848;
     color: white;
     text-align: center;
-    padding: 30px 20px;
+    padding: clamp(20px, 5vw, 30px) 20px;
     margin-top: 50px;
+    font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 footer a {
@@ -152,10 +272,131 @@ footer a {
     text-decoration: underline;
 }
 
-/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nav-left {
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-logo {
+        width: 100%;
+        text-align: center;
+    }
+    
+    section {
+        padding: 40px 15px;
+    }
+    
+    header {
+        padding: 30px 15px;
+    }
+    
+    .stack {
+        gap: 10px;
+    }
+    
+    .stack-item {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 2rem;
+    section {
+        padding: 30px 12px;
+    }
+    
+    header {
+        padding: 25px 10px;
+        padding-top: 90px;
+    }
+    
+    nav {
+        padding: 10px 10px;
+    }
+    
+    .nav-left {
+        gap: 8px;
+    }
+    
+    nav a {
+        font-size: 0.75rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .feature, .advantage, .faq-item {
+        padding: 15px;
+    }
+    
+    .screenshots {
+        grid-template-columns: 1fr;
+    }
+    
+    .stack {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .stack-item {
+        padding: 7px 10px;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: 25px 10px;
+    }
+    
+    header {
+        padding: 20px 10px;
+        padding-top: 80px;
+    }
+    
+    body {
+        padding-top: 70px;
+    }
+    
+    nav {
+        padding: 8px 8px;
+    }
+    
+    .nav-left {
+        gap: 5px;
+    }
+    
+    nav a {
+        font-size: 0.65rem;
+        padding: 5px 8px;
+    }
+    
+    .feature, .advantage, .faq-item {
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .screenshots {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stack-item {
+        padding: 6px 8px;
+        font-size: 0.7rem;
     }
 }
 
@@ -163,9 +404,23 @@ footer a {
 </head>
 <body>
 
+<nav>
+    <div class="nav-left">
+        <a href="index.html">Accueil</a>
+        <a href="fonctionnalites.html">Fonctionnalités</a>
+        <a href="avantages.html">Avantages</a>
+        <a href="faq.html">FAQ</a>
+        <a href="telecharger.html">Télécharger</a>
+    </div>
+</nav>
+
 <header>
     <h1>Studifly</h1>
-    <p>Le compagnon d’études intelligent pour organiser vos cours et améliorer votre productivité</p>
+    <p>Le compagnon d'études intelligent pour organiser vos cours et améliorer votre productivité</p>
+    <div class="cta-buttons">
+        <a href="telecharger.html" class="btn btn-primary">Télécharger l'app</a>
+        <a href="fonctionnalites.html" class="btn">En savoir plus</a>
+    </div>
 </header>
 
 <section>
@@ -177,7 +432,7 @@ footer a {
     </p>
 </section>
 
-<section>
+<section id="features">
     <h2>Fonctionnalités principales</h2>
     <div class="features">
         <div class="feature">
@@ -197,6 +452,9 @@ footer a {
             <p>Outils pour vous aider à vous concentrer sur vos priorités et maximiser votre apprentissage.</p>
         </div>
     </div>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="fonctionnalites.html" class="btn">Découvrir toutes les fonctionnalités →</a>
+    </div>
 </section>
 
 <section>
@@ -209,8 +467,8 @@ footer a {
     </div>
 </section>
 
-<section>
-    <h2>Avantages pour l’étudiant</h2>
+<section id="advantages">
+    <h2>Avantages pour l'étudiant</h2>
     <div class="advantages">
         <div class="advantage">
             <h3>Gain de temps</h3>
@@ -231,29 +489,7 @@ footer a {
     </div>
 </section>
 
-<section>
-    <h2>Comment ça fonctionne</h2>
-    <div class="description">
-        <p>1. Créez votre compte ou connectez-vous via Supabase.</p>
-        <p>2. Ajoutez vos cours, examens et tâches dans l’agenda.</p>
-        <p>3. Partagez vos notes et ressources avec vos camarades.</p>
-        <p>4. Recevez des notifications pour vos deadlines et utilisez le mode focus pour étudier efficacement.</p>
-    </div>
-</section>
-
-<section>
-    <h2>Technologies utilisées</h2>
-    <div class="stack">
-        <div class="stack-item">React Native</div>
-        <div class="stack-item">TypeScript</div>
-        <div class="stack-item">Supabase</div>
-        <div class="stack-item">Tailwind CSS</div>
-        <div class="stack-item">Styled Components</div>
-        <div class="stack-item">Node.js</div>
-    </div>
-</section>
-
-<section>
+<section id="faq">
     <h2>FAQ</h2>
     <div class="faq-section">
         <div class="faq-item">
@@ -275,17 +511,21 @@ footer a {
     </div>
 </section>
 
-<section>
-    <h2>Téléchargement / GitHub</h2>
+<section id="download">
+    <h2>Prêt à commencer ?</h2>
     <p class="description">
-        L’application est open-source et disponible. Vous pouvez consulter le code, contribuer ou tester l’application contactez-moi par mail pour plus d'informations. si voyez des bugs ou des améliorations à proposer. n'hésitez pas à me contacter.
+        Téléchargez Studifly maintenant et commencez à optimiser votre façon d'étudier. 
+        L'application est gratuite et disponible sur Android. Une version web et iOS arrivent bientôt.
     </p>
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="telecharger.html" class="btn btn-primary">Télécharger Studifly →</a>
+    </div>
+</section>
 <footer>
     <p>© 2025 Studifly. Tous droits réservés. | Contact : <a href="batchiemmanuel123@gmail.com">contact@studifly.com</a></p>
 </footer>
 
 <script>
-// ====== FAQ Toggle ======
 document.querySelectorAll('.faq-item').forEach(item => {
     item.addEventListener('click', () => {
         item.classList.toggle('open');
@@ -298,7 +538,6 @@ document.querySelectorAll('.faq-item').forEach(item => {
     });
 });
 
-// ====== Fade-in Sections on Scroll ======
 const sections = document.querySelectorAll('section');
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -312,7 +551,6 @@ sections.forEach(section => {
     observer.observe(section);
 });
 
-// ====== Scroll to Top Button ======
 const scrollBtn = document.createElement('button');
 scrollBtn.textContent = "↑";
 scrollBtn.id = "scrollTopBtn";
